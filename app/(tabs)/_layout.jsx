@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import {Tabs} from 'expo-router'
 
-import { HomeIcon,ShoppingBagIcon,HeartIcon,UserIcon } from "react-native-heroicons/outline";
+import { HomeIcon,ShoppingBagIcon,HeartIcon,UserIcon,TruckIcon } from "react-native-heroicons/outline";
 const Layout = () => {
   return (
       <Tabs
@@ -41,6 +41,15 @@ const Layout = () => {
             title:"Cart",
             headerShown:false,
             tabBarIcon:({color,focused})=> <ShoppingBagIcon name="Cart" color={color} focused={focused}/>
+          }}
+         />
+
+      <Tabs.Screen 
+          name='orders'
+          options={{
+            title:"Orders",
+            headerShown:false,
+            tabBarIcon:({color,focused})=> <TruckIcon name="Orders" color={color} focused={focused}/>
           }}
          />
 

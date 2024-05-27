@@ -7,7 +7,9 @@ module.exports = {
     extend: {
       colors:{
         splash:"#FFF",
-        primaryBtn:"#2A6E4F"
+        primaryBtn:"#2A6E4F",
+        dark_white:"#E8E9EB",
+        light_white:"#F9F8FC"
       },
       fontFamily:{
         'intro':['LobsterTwo-Bold','sans-serif'],
