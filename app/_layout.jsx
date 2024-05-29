@@ -35,6 +35,7 @@ const RootLayout = () => {
   return (
    <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)" options={{headerShown:false}}/>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
        {/* !! change this too dynamic route */}
       <Stack.Screen name="(food)"  options={{headerShown:false}} />
