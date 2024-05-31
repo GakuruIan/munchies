@@ -9,6 +9,7 @@ dist/
 web-build/
 
 assets/
+Config/
 
 # Native
 *.orig.*

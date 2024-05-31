@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { View, Text, ScrollView, TouchableOpacity,Image} from 'react-native'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,7 +8,31 @@ import ProfileTab from '../../components/ProfileTab';
 
 import african from '../../assets/images/african.jpg'
 
+import { Logout } from '../../Appwrite/Appwrite';
+import { router } from 'expo-router';
+
+import { useSelector,useDispatch } from 'react-redux';
+
+
+import { logout } from '../../redux/UserReducer';
+
 const profile = () => {
+  const {currentUser,isLoggedIn}= useSelector(state=>state.user)
+  
+  const dispatch = useDispatch()
+
+  const handleLogout=async()=>{
+     try {
+        // await Logout()
+
+        dispatch(logout())
+
+        router.replace('/login')
+     } catch (error) {
+         console.log(error);
+     }
+  }
+
   return (
     <SafeAreaView className="h-full bg-light_white">
       <ScrollView className="h-full">
@@ -35,14 +59,14 @@ const profile = () => {
                   
                   <View className="flex-row items-center gap-x-2">
                     <Image 
-                      source={african}
+                      source={{uri:currentUser.avatar}}
                       resizeMode="contain"
                       className="h-16 w-16 rounded-full"
                     />
 
                     <View className="">
-                      <Text className="text-2xl font-text-sm">John Doe</Text>
-                      <Text className="text-base font-text-sm text-gray-400">John@gmail.com</Text>
+                      <Text className="text-2xl font-text-sm">{currentUser.fullname}</Text>
+                      <Text className="text-base font-text-sm text-gray-400">{currentUser.email}</Text>
                     </View>
                   </View>
                   
@@ -113,10 +137,12 @@ const profile = () => {
 
               <View className=''>
 
-              <ProfileTab
-                  text="Log out"
-                  Icon={ArrowLeftStartOnRectangleIcon}
-              />
+              <TouchableOpacity onPress={handleLogout}>
+                <ProfileTab
+                    text="Log out"
+                    Icon={ArrowLeftStartOnRectangleIcon}
+                />
+              </TouchableOpacity>
               
               <View className="flex-row items-center justify-between py-4 px-2 my-2 bg-red-300/50 rounded-md">
                 <View className="flex-row items-center gap-x-2">

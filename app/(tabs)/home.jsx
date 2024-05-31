@@ -1,15 +1,40 @@
 import { View, Text,FlatList, Image, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import african from '../../assets/images/african.jpg'
 import  { ArrowLeftStartOnRectangleIcon,MagnifyingGlassIcon } from "react-native-heroicons/outline";
 
 // components
 import Category from '../../components/Category';
 import Card from '../../components/Card';
 
+// redux
+import { useSelector } from 'react-redux';
+
+//expo router
+import{router} from 'expo-router'
+
+import { Logout } from '../../Appwrite/Appwrite';
+
 const Home = () => {
+  const {currentUser,isLoggedIn} = useSelector(state=>state.user)
+
+  // useEffect(()=>{
+  //   if(!currentUser && !isLoggedIn){
+  //      router.replace('/login')
+  //   }
+  // },[])
+
+  const handleLogout=async()=>{
+    try {
+       await Logout()
+
+       router.replace('/login')
+    } catch (error) {
+        console.log(error);
+    }
+ }
+
   return (
     <SafeAreaView className="bg-white h-full">
         <FlatList 
@@ -19,23 +44,25 @@ const Home = () => {
           )}
           numColumns={2}
           ListHeaderComponent={()=>(
-           <View className="px-2 pt-4 space-y-4">
+           <View className="px-2 pt-4 space-y-4 relative">
 
              <View className="flex-row items-center justify-between">
                <View className="flex-row gap-x-2 items-center">
                 <Image
-                  source={african}
+                  source={{uri:currentUser.avatar}}
                   resizeMode="contain"
-                  className="h-10 w-10 rounded-full"
+                  className="h-12 w-12 rounded-full"
                  />
                  <View className="items-start">
-                   <Text className="text-xl font-header font-semibold">Hi, John doe</Text>
+                   <Text className="text-xl font-header font-semibold">Hi, {currentUser.fullname}</Text>
                    <Text className="text-base text-gray-400 font-text-sm">Current Location</Text>
                  </View>
                </View>
 
                <View>
+                 <TouchableOpacity onPress={handleLogout}>
                   <ArrowLeftStartOnRectangleIcon color="#000"/>
+                 </TouchableOpacity>
                </View>
              </View>
 

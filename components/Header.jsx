@@ -1,11 +1,13 @@
 import { View, Text,TouchableOpacity } from 'react-native'
 import React from 'react'
 
+import  {router} from 'expo-router'
+
 const Header = ({text,BackIcon,MoreIcon,showMore}) => {
   return (
     <View className="bg-white ">
         <View className="px-2 h-16  w-full flex-row items-center justify-between">
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>router.back()}>
                 <BackIcon color="#222"/>
             </TouchableOpacity>
 

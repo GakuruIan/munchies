@@ -4,6 +4,10 @@ import {Stack} from 'expo-router'
 import {useFonts} from 'expo-font'
 import { SplashScreen } from 'expo-router'
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import {store,persistor} from '../redux/store'
+
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -33,13 +37,16 @@ const RootLayout = () => {
 
  
   return (
-   <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{headerShown:false}}/>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-       {/* !! change this too dynamic route */}
-      <Stack.Screen name="(food)"  options={{headerShown:false}} />
-   </Stack>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{headerShown:false}}/>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(food)"  options={{headerShown:false}} />
+        </Stack>
+      </PersistGate>
+    </Provider>
   )
 }
 
