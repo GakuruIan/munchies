@@ -7,8 +7,21 @@ const Config={
     projectId:env.PROJECTID,
     databaseId:env.DATABASEID,
     usersCollectionId:env.USERSCOLLECTIONID,
+    foodCollectionId:env.FOODCOLLECTIONID,
+    categoryCollectionID:env.CATEGORYCOLLECTIONID,
     storageBucketId:env.STORAGEBUCKETID
 }
+
+const {
+    endpoint,
+    platform,
+    projectId,
+    databaseId,
+    usersCollectionId,
+    foodCollectionId,
+    categoryCollectionID,
+    storageBucketId
+} = Config
 
 const client = new Client()
 
@@ -96,4 +109,27 @@ export const Logout=async()=>{
 
         throw new Error(error)
      }
+}
+
+export const GetAllCategories=async()=>{
+    try {
+        const Categories = await database.listDocuments(
+            databaseId,
+            categoryCollectionID
+        )
+
+        return Categories.documents
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
+export const GetAllFoods=async()=>{
+    try {
+        const Foods = await database.listDocuments(databaseId,foodCollectionId)
+        
+        return Foods.documents
+    } catch (error) {
+        throw new Error(error)
+    }
 }

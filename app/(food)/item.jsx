@@ -44,8 +44,30 @@ const Item = () => {
              </View>
 
             <View className="my-4">
-               <Text className="text-2xl font-text-sm font-semibold mb-2">Ingridents</Text>
-               <Text className="font-text-sm text-base">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam consequuntur esse veniam rerum cumque? Repudiandae voluptatibus voluptates error ipsum sit ullam dolore eos ratione quas pariatur nam unde quibusdam reprehenderit, debitis vero. Nulla, placeat est! Architecto est voluptatibus neque quidem.</Text>
+              <Text className="text-2xl font-header">Extras</Text>
+              <Text className="text-sm mb-3 text-gray-600">Choose your options</Text>
+
+              <View className=" w-full mb-2 py-3 flex-row items-center justify-between px-2 border-[1px] border-primaryBtn rounded-md">
+                  <Text className="text-base">Onions +300</Text>
+                  <View className="p-2 rounded-full bg-primaryBtn">
+                       <PlusIcon color="#fff" size={18}/>
+                  </View>
+              </View>
+
+              <View className="border w-full mb-2 py-3 flex-row items-center justify-between px-2 border-gray-300 rounded-md">
+                  <Text className="text-base">Onions +300</Text>
+                  <View className="p-2 rounded-full bg-primaryBtn">
+                       <PlusIcon color="#fff" size={18}/>
+                  </View>
+              </View>
+
+              <View className="border w-full mb-2 py-3 flex-row items-center justify-between px-2 border-gray-300 rounded-md">
+                  <Text className="text-base">Onions +300</Text>
+                  <View className="p-2 rounded-full bg-primaryBtn">
+                       <PlusIcon color="#fff" size={18}/>
+                  </View>
+              </View>
+
             </View>
 
             <View className="px-2 w-full items-center justify-center">
@@ -54,6 +76,7 @@ const Item = () => {
                 <ShoppingBagIcon size={18} color="#fff"/>
               </TouchableOpacity>
             </View>
+
           </View>
         </ScrollView>
     </SafeAreaView>
