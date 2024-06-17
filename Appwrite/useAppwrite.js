@@ -10,7 +10,7 @@ const FetchData = async()=>{
   setIsLoading(true)
  try {
   const response = await fn()
-  setData(response)
+  setData((prev)=>response)
  } catch (error) {
    Alert.alert('Error',error.message)
  }

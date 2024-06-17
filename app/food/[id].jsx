@@ -1,33 +1,53 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, ScrollView, Image, TouchableOpacity,ActivityIndicator } from 'react-native'
+import React,{useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeftIcon, HeartIcon, MinusIcon, PlusIcon, ShoppingBagIcon } from 'react-native-heroicons/solid'
-import { router } from 'expo-router'
+import { ChevronLeftIcon, MinusIcon, PlusIcon, ShoppingBagIcon } from 'react-native-heroicons/solid'
+import { HeartIcon } from 'react-native-heroicons/outline'
 
-import biryani from '../../assets/images/biryani.png'
+import { router, useLocalSearchParams } from 'expo-router'
+
+import useAppwrite from '../../Appwrite/useAppwrite'
+import { GetFood } from '../../Appwrite/Appwrite'
+
+
+import { COLOR } from '../../Constants'
 
 const Item = () => {
+  const {id}= useLocalSearchParams()
+
+  const{data:[Food],isLoading} = useAppwrite(()=>GetFood(id))
+
   return (
     <SafeAreaView className="bg-white h-full px-2">
-        <ScrollView className="h-full">
-          <View className="mt-4 pb-4  w-full">
+    
+        <ScrollView className="h-full ">
+          {
+            isLoading ? 
+            (
+              <View className="min-h-screen items-center justify-center">
+                  <ActivityIndicator size="large" color={COLOR}/>
+              </View>
+            ) 
+            :
+         
+         ( <View className="mt-4 pb-4  w-full">
             <View className="flex-row items-center justify-between ">
               <TouchableOpacity onPress={()=>router.back()}>
-                <ChevronLeftIcon size={24} color="#222"/>
+                <ChevronLeftIcon size={26} color="#222"/>
               </TouchableOpacity>
                <HeartIcon  size={24} color="#222"/>
             </View>
              
              <View className="mt-4">
-               <Text className="text-5xl font-text-sm text-center mb-2">Chicken Biryani</Text>
-                <Text className="text-2xl text-center text-gray-500">KSH 1200</Text>
+               <Text className="text-5xl font-text-sm text-center mb-2">{Food?.name}</Text>
+                <Text className="text-2xl text-center text-gray-500">KSH {Food?.price}</Text>
              </View>
 
              <View className="items-center justify-center my-6  rounded-md">
                 <Image 
-                 source={biryani}
-                 resizeMode='contain'
-                 className="h-64 w-64"
+                 source={{uri:Food?.image}}
+                 resizeMode='cover'
+                 className="h-96 w-96 rounded-md"
                 />
              </View>
 
@@ -77,7 +97,8 @@ const Item = () => {
               </TouchableOpacity>
             </View>
 
-          </View>
+          </View>)
+          }
         </ScrollView>
     </SafeAreaView>
   )

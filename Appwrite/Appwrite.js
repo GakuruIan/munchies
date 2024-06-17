@@ -25,6 +25,7 @@ const {
 
 const client = new Client()
 
+
 client.setEndpoint(Config.endpoint)
       .setPlatform(Config.platform)
       .setProject(Config.projectId)
@@ -124,12 +125,35 @@ export const GetAllCategories=async()=>{
     }
 }
 
-export const GetAllFoods=async()=>{
+export const GetAllFoods=async(Offset)=>{
+    const Limit = 10
+    const PAGE_SIZE = 10
+
+    console.log(Offset);
     try {
-        const Foods = await database.listDocuments(databaseId,foodCollectionId)
+        const Foods = await database.listDocuments(
+            databaseId,
+            foodCollectionId,
+            [
+                Query.limit(Limit),
+                Query.offset(Offset * PAGE_SIZE)
+            ]
+           )
         
         return Foods.documents
     } catch (error) {
         throw new Error(error)
     }
+}
+
+export const GetFood=async(id)=>{
+    try {
+        const Food = await database.listDocuments(databaseId,foodCollectionId,[
+            Query.equal('$id',id)
+        ])
+
+        return Food.documents
+    } catch (error) {
+         throw new Error(error)
+    }   
 }
