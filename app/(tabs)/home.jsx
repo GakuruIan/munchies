@@ -84,7 +84,7 @@ const Home = () => {
   return (
     <SafeAreaView className=" h-full">
 
-        <View className="px-2 shadow-2xl shadow-gray-800 bg-white space-y-4 relative">
+        <View className="px-2  bg-white space-y-4 relative">
 
           <View className="flex-row items-center py-4 justify-between">
               <View className="flex-row gap-x-2 items-center">
@@ -110,7 +110,7 @@ const Home = () => {
           </View>
                :
           <FlatList 
-          className="bg-light_white"
+          className="bg-light_white px-1"
           data={Foods}
           
           keyExtractor={(item)=>item.$id}

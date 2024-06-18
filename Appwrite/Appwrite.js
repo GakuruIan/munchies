@@ -128,8 +128,6 @@ export const GetAllCategories=async()=>{
 export const GetAllFoods=async(Offset)=>{
     const Limit = 10
     const PAGE_SIZE = 10
-
-    console.log(Offset);
     try {
         const Foods = await database.listDocuments(
             databaseId,

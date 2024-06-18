@@ -26,7 +26,7 @@ const App = () => {
               />
              <Text className="text-5xl font-intro text-[#410C00]">Munchies</Text>
 
-             <Link href="/login">Login</Link>
+             <Link href="/home">Login</Link>
           </View>
         <StatusBar style='auto' backgroundColor='#FFF'/>
        </ScrollView>
